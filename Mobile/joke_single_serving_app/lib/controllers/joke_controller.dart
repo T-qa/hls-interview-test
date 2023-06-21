@@ -1,26 +1,57 @@
-  import 'package:hive/hive.dart';
 
-  import '../models/joke.dart';
-  import '../models/vote.dart';
-  import '../services/joke_service.dart';
+import '../models/joke.dart';
+import '../models/vote.dart';
+import '../services/joke_service.dart';
 
-  class JokeController {
-    final Box<Vote> _voteBox;
-    final JokeService _jokeService;
+class JokeController {
+  final JokeService _jokeService = JokeService();
+  List<Joke> _jokes = [];
+  int _currentJokeIndex = 0;
+  Joke? _currentJoke;
 
-    JokeController(this._voteBox, this._jokeService);
+  Future<void> fetchJokes() async {
+    _jokes = await _jokeService.getJokes();
+    _currentJokeIndex = 0;
+  }
 
-    Future<Joke?> getNextJoke() async {
-      final List<String> votedJokeIds =
-          _voteBox.values.map((vote) => vote.jokeId).toList();
-      final List<Joke> allJokes = await _jokeService.getAllJokes();
-      final List<Joke> remainingJokes =
-          allJokes.where((joke) => !votedJokeIds.contains(joke.id)).toList();
-      return remainingJokes.isNotEmpty ? remainingJokes.first : null;
+  Joke? getCurrentJoke() {
+    if (_jokes.isEmpty || _currentJokeIndex >= _jokes.length) {
+      return null;
     }
+    return _jokes[_currentJokeIndex];
+  }
 
-    void recordVote(Joke joke, bool liked) {
-      final vote = Vote(jokeId: joke.id, isLiked: liked);
-      _voteBox.add(vote);
+  void showNextJoke() {
+    if (_currentJokeIndex < _jokes.length - 1) {
+      _currentJokeIndex++;
     }
   }
+
+  void likeJoke() {
+    if (_currentJokeIndex < _jokes.length) {
+      final Joke currentJoke = _jokes[_currentJokeIndex];
+      final Vote vote = Vote(jokeId: currentJoke.id, isLiked: true);
+      _jokeService.recordVote(vote);
+
+      if (_currentJokeIndex == _jokes.length - 1) {
+        _currentJokeIndex++;
+        // Set currentJoke to null to indicate no more jokes
+        _currentJoke = null;
+      }
+    }
+  }
+
+  void dislikeJoke() {
+      if (_currentJokeIndex < _jokes.length) {
+      final Joke currentJoke = _jokes[_currentJokeIndex];
+      final Vote vote = Vote(jokeId: currentJoke.id, isLiked: false);
+      _jokeService.recordVote(vote);
+
+      if (_currentJokeIndex == _jokes.length - 1) {
+        _currentJokeIndex++;
+        // Set currentJoke to null to indicate no more jokes
+        _currentJoke = null;
+      }
+    }
+  }
+}

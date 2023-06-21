@@ -5,15 +5,48 @@ import 'package:joke_single_serving_app/constants/app_constant.dart';
 import '../controllers/joke_controller.dart';
 import '../models/joke.dart';
 
-class JokeView extends StatelessWidget {
-  final JokeController jokeController;
-  final Joke? joke;
-
+class JokeView extends StatefulWidget {
   const JokeView({
-    required this.jokeController,
-    super.key,
-    required this.joke,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<JokeView> createState() => _JokeViewState();
+}
+
+class _JokeViewState extends State<JokeView> {
+  final JokeController _jokeController = JokeController();
+  Joke? _currentJoke;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchJokes();
+  }
+
+  Future<void> _fetchJokes() async {
+    await _jokeController.fetchJokes();
+    setState(() {
+      _currentJoke = _jokeController.getCurrentJoke();
+    });
+  }
+
+  void _likeJoke() {
+    _jokeController.likeJoke();
+    _showNextJoke();
+  }
+
+  void _dislikeJoke() {
+    _jokeController.dislikeJoke();
+    _showNextJoke();
+  }
+
+  void _showNextJoke() {
+    _jokeController.showNextJoke();
+    setState(() {
+      _currentJoke = _jokeController.getCurrentJoke();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +55,7 @@ class JokeView extends StatelessWidget {
         designSize: const Size(375, 825),
         minTextAdapt: true // Provide your design size
         );
+
     return Column(
       children: [
         Container(
@@ -50,7 +84,7 @@ class JokeView extends StatelessWidget {
             ],
           ),
         ),
-        joke != null
+        _currentJoke != null
             ? Container(
                 height: 430.h,
                 padding: EdgeInsets.symmetric(
@@ -66,23 +100,22 @@ class JokeView extends StatelessWidget {
                       ),
                       width: 350.w,
                       child: Text(
-                        joke!.text,
+                        _currentJoke!.text,
                         style: TextStyle(fontSize: 15.sp),
                         textAlign: TextAlign.justify,
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                        horizontal: 15.w,
-                        vertical: 60.h,
+                        horizontal: 10.w,
+                        vertical: 30.h,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: () =>
-                                  jokeController.recordVote(joke!, true),
+                              onPressed: _likeJoke,
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: AppConstants.blue),
                               child: const Text('This is Funny!'),
@@ -91,8 +124,7 @@ class JokeView extends StatelessWidget {
                           SizedBox(width: 30.w),
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: () =>
-                                  jokeController.recordVote(joke!, false),
+                              onPressed: _dislikeJoke,
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: AppConstants.green),
                               child: const Text('This is not Funny.'),
@@ -128,7 +160,7 @@ class JokeView extends StatelessWidget {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _fetchJokes,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.brown,
                       ),
