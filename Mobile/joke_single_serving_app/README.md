@@ -5,8 +5,7 @@ Joke Single Serving Application in Flutter framework.
 
 ## Screenshots </a>
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/94039133/205861382-223ca57e-7ba2-4d4f-8f1a-db4efed92bd4.jpg" width="200" />
-  <img src="https://user-images.githubusercontent.com/94039133/205861377-6157446a-51dc-4178-9ceb-21cd2dcf7ddf.jpg" width="200" />
+ 
 
 ## Demo <a name="demo"></a>
 
