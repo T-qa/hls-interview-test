@@ -1,3 +1,5 @@
+import 'package:hive/hive.dart';
+
 class Vote {
   final String jokeId;
   final bool isLiked;
@@ -29,5 +31,23 @@ class Vote {
       jokeId: map['jokeId'] as String,
       isLiked: map['isLiked'] as bool,
     );
+  }
+}
+
+class VoteAdapter extends TypeAdapter<Vote> {
+  @override
+  final typeId = 1;
+
+  @override
+  Vote read(BinaryReader reader) {
+    final jokeId = reader.readString();
+    final isLiked = reader.readBool();
+    return Vote(jokeId: jokeId, isLiked: isLiked);
+  }
+
+  @override
+  void write(BinaryWriter writer, Vote vote) {
+    writer.writeString(vote.jokeId);
+    writer.writeBool(vote.isLiked);
   }
 }

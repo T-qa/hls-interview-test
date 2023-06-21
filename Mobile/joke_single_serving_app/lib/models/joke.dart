@@ -1,3 +1,5 @@
+import 'package:hive/hive.dart';
+
 class Joke {
   final String id;
   final String text;
@@ -29,5 +31,23 @@ class Joke {
       id: map['id'] as String,
       text: map['text'] as String,
     );
+  }
+}
+
+class JokeAdapter extends TypeAdapter<Joke> {
+  @override
+  final typeId = 0;
+
+  @override
+  Joke read(BinaryReader reader) {
+    final id = reader.readString();
+    final text = reader.readString();
+    return Joke(id: id, text: text);
+  }
+
+  @override
+  void write(BinaryWriter writer, Joke joke) {
+    writer.writeString(joke.id);
+    writer.writeString(joke.text);
   }
 }

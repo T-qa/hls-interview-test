@@ -1,20 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:joke_single_serving_app/views/joke_homepage.dart';
+import 'services/joke_service.dart';
+import 'models/joke.dart';
+import 'models/vote.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(JokeAdapter());
+  Hive.registerAdapter(VoteAdapter());
+
+  // Open the Hive box for jokes
+  await Hive.openBox<Joke>('jokes');
+
+  // Initialize and store initial jokes
+  final JokeService jokeService = JokeService();
+  await jokeService.storeInitialJokes();
+
+  runApp(const JokeSingleServingApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class JokeSingleServingApp extends StatelessWidget {
+  const JokeSingleServingApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Joke App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: const JokeHomePage(),
     );
   }
 }
