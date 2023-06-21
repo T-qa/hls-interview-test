@@ -2,7 +2,6 @@ import 'dart:io';
 
 String miniMaxSum(List<int> list) {
   // Check if the list is empty or has less than 5 elements
-
   if (list.isEmpty || list.length < 5) {
     return 'Invalid list';
   }
@@ -32,14 +31,13 @@ String miniMaxSum(List<int> list) {
   Max in array: $maxNum
   Min in array: $minNum
   Total of array: $totalSum
-  Even Elements: $evenElements
-  Odd Elements: $oddElements
+  ${evenList.isEmpty ? 'Even Elements: None' : 'Even Elements: $evenElements'}
+  ${oddList.isEmpty ? 'Odd Elements: None' : 'Odd Elements: $oddElements'}
 ''';
 }
 
 void main() {
   stdout.write('Enter a list of integers (space-separated): ');
-
   /* Read input from the user and split it into a list of strings.
      Convert the list of strings into a list of integers using `map` and `int.parse` */
   List<int> arr = stdin.readLineSync()!.split(' ').map(int.parse).toList();
