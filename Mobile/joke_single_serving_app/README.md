@@ -10,7 +10,7 @@ Joke Single Serving Application in Flutter framework.
 
  
 ## Demo <a name="demo"></a>
-![Demo](https://github.com/T-qa/hls-interview-test/assets/71199588/d51562ff-be2a-4e39-90d9-b3f31191ad4c.gif)
+![Demo](https://user-images.githubusercontent.com/71199588/247779264-56ec3194-c83c-4a2f-ac73-e2f22a772b1e.mp4)
 
 
 ## Technologies Used
