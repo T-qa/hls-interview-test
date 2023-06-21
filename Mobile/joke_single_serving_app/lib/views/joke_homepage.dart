@@ -40,8 +40,16 @@ class _JokeHomePageState extends State<JokeHomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text(AppConstants.appName),
+          backgroundColor: Colors.white,
+          title: const Text(
+            AppConstants.appName,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          centerTitle: true,
         ),
         body: FutureBuilder(
           future: jokeController?.getNextJoke(),

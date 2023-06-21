@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:joke_single_serving_app/views/joke_homepage.dart';
+
 import 'services/joke_service.dart';
 import 'models/joke.dart';
 import 'models/vote.dart';
@@ -26,13 +27,10 @@ class JokeSingleServingApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Joke App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const JokeHomePage(),
+      home: JokeHomePage(),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppConstants {
-  static const String appName = 'Joke App';
+  static const String appName = 'Single Serving Joke App';
   static const String allJokesMessageDisplayed =
       'That\'s all the jokes for today! Come back another day!';
   static const String copyRightMessage =
