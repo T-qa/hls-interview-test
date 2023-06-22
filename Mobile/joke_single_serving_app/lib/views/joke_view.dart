@@ -91,7 +91,7 @@ class _JokeViewState extends State<JokeView> {
                   horizontal: 20.w,
                 ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
                       padding: EdgeInsets.symmetric(
@@ -102,8 +102,11 @@ class _JokeViewState extends State<JokeView> {
                       child: Text(
                         _currentJoke!.text,
                         style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w300,
+                          height: 1.2,
+                          fontSize: 13.5.sp,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0.2,
                         ),
                         textAlign: TextAlign.justify,
                       ),
@@ -177,11 +180,10 @@ class _JokeViewState extends State<JokeView> {
                 ),
               ),
         const Divider(thickness: 1),
-        Container(
-          height: 120.h,
+        Padding(
           padding: EdgeInsets.symmetric(
-            vertical: 5.h,
-            horizontal: 20.w,
+            vertical: 3.h,
+            horizontal: 14.w,
           ),
           child: Column(
             children: [
@@ -190,9 +192,11 @@ class _JokeViewState extends State<JokeView> {
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 12.sp,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                 ),
                 textAlign: TextAlign.center,
+                softWrap: true,
+                textDirection: TextDirection.rtl,
               ),
               SizedBox(
                 height: 10.h,
@@ -200,9 +204,9 @@ class _JokeViewState extends State<JokeView> {
               Text(
                 'Copyright 2021 HLS',
                 style: TextStyle(
-                  fontSize: 13.sp,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 15.sp,
+                  color: Colors.black54,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ],
