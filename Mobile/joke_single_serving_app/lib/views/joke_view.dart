@@ -59,7 +59,7 @@ class _JokeViewState extends State<JokeView> {
     return Column(
       children: [
         Container(
-          height: 150.h,
+          height: 152.h,
           width: double.infinity,
           decoration: const BoxDecoration(color: AppConstants.green),
           child: Column(
@@ -69,8 +69,8 @@ class _JokeViewState extends State<JokeView> {
                 'A joke a day keeps the doctor away',
                 style: TextStyle(
                   color: AppConstants.white,
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.w500,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               Text(
@@ -78,7 +78,7 @@ class _JokeViewState extends State<JokeView> {
                 style: TextStyle(
                   color: AppConstants.white,
                   fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ],
@@ -86,7 +86,7 @@ class _JokeViewState extends State<JokeView> {
         ),
         _currentJoke != null
             ? Container(
-                height: 430.h,
+                height: 450.h,
                 padding: EdgeInsets.symmetric(
                   horizontal: 20.w,
                 ),
@@ -101,14 +101,21 @@ class _JokeViewState extends State<JokeView> {
                       width: 350.w,
                       child: Text(
                         _currentJoke!.text,
-                        style: TextStyle(fontSize: 15.sp),
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w300,
+                        ),
                         textAlign: TextAlign.justify,
                       ),
                     ),
-                    Padding(
+                    SizedBox(
+                      height: 50.h,
+                    ),
+                    Container(
+                      height: 80.h,
                       padding: EdgeInsets.symmetric(
-                        horizontal: 10.w,
-                        vertical: 30.h,
+                        horizontal: 12.w,
+                        vertical: 10.h,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -137,7 +144,7 @@ class _JokeViewState extends State<JokeView> {
                 ),
               )
             : Container(
-                height: 430.h,
+                height: 450.h,
                 padding: EdgeInsets.symmetric(
                   horizontal: 20.w,
                 ),
@@ -171,8 +178,9 @@ class _JokeViewState extends State<JokeView> {
               ),
         const Divider(thickness: 1),
         Container(
-          height: 130.h,
+          height: 120.h,
           padding: EdgeInsets.symmetric(
+            vertical: 5.h,
             horizontal: 20.w,
           ),
           child: Column(
@@ -181,10 +189,10 @@ class _JokeViewState extends State<JokeView> {
                 AppConstants.copyRightMessage,
                 style: TextStyle(
                   color: Colors.grey,
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w400,
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w500,
                 ),
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.center,
               ),
               SizedBox(
                 height: 10.h,
@@ -193,7 +201,8 @@ class _JokeViewState extends State<JokeView> {
                 'Copyright 2021 HLS',
                 style: TextStyle(
                   fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],

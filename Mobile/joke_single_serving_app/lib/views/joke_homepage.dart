@@ -15,15 +15,52 @@ class _JokeHomePageState extends State<JokeHomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            AppConstants.appName,
-            style: TextStyle(
+          leading: Container(
+            padding: const EdgeInsets.all(8),
+            child: const Icon(
+              Icons.h_mobiledata_outlined,
+              size: 40,
               color: Colors.black,
-              fontWeight: FontWeight.bold,
             ),
           ),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Row(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Handcrafted by',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Jim HLS',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(width: 8),
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        'https://cdn.quotesgram.com/img/97/60/1409672537-Smile-Quotes-Graphics-157.jpg'),
+                  ),
+                ],
+              ),
+            ),
+          ],
           centerTitle: true,
-          backgroundColor: AppConstants.green,
+          backgroundColor: AppConstants.white,
+          elevation: 0,
         ),
         body: const JokeView(),
       ),
