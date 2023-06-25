@@ -32,7 +32,6 @@ String miniMaxSum(List<int> list) {
   Min in array: $minNum
   Total of array: $totalSum
   ${evenList.isEmpty ? 'Even Elements: None' : 'Even Elements: $evenElements'}
-  ${oddList.isEmpty ? 'Odd Elements: None' : 'Odd Elements: $oddElements'}
 ''';
 }
 
